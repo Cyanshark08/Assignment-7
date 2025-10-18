@@ -4,7 +4,7 @@
 
 Application::Application()
     : m_State(MainAppState::MainApp),
-    m_CurrentSubApp(AppID::InvalidApp)
+    m_CurrentSubApp(EAppID::InvalidApp)
 {
 }
 
@@ -21,13 +21,13 @@ void Application::Run()
         case MainAppState::SubApp:
             switch (m_CurrentSubApp)
             {
-            case AppID::SimpleCalculatorApp:
+            case EAppID::SimpleCalculatorApp:
                 break;
-            case AppID::ArithmeticApp:
+            case EAppID::ArithmeticApp:
                 break;
-            case AppID::NQueensApp:
+            case EAppID::NQueensApp:
                 break;
-            case AppID::InvalidApp:
+            case EAppID::InvalidApp:
             default:
                 std::cout << "\n\tERROR: Invalid application selected";
                 std::cout << "\n";
@@ -36,7 +36,7 @@ void Application::Run()
             }
 
             m_State = MainAppState::MainApp;
-            m_CurrentSubApp = AppID::InvalidApp;
+            m_CurrentSubApp = EAppID::InvalidApp;
             break;
         }
     }
@@ -70,15 +70,15 @@ void Application::QueryState()
     {
     case '1':
         m_State = MainAppState::SubApp;
-        m_CurrentSubApp = AppID::SimpleCalculatorApp;
+        m_CurrentSubApp = EAppID::SimpleCalculatorApp;
         break;
     case '2':
         m_State = MainAppState::SubApp;
-        m_CurrentSubApp = AppID::ArithmeticApp;
+        m_CurrentSubApp = EAppID::ArithmeticApp;
         break;
     case '3':
         m_State = MainAppState::SubApp;
-        m_CurrentSubApp = AppID::NQueensApp;
+        m_CurrentSubApp = EAppID::NQueensApp;
         break;
     case '0':
         m_State = MainAppState::Exited;

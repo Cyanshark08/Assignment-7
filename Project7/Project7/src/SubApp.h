@@ -1,6 +1,6 @@
 #pragma once
 
-enum class AppID
+enum class EAppID
 {
 	InvalidApp = -1,
 	SimpleCalculatorApp = 0,
@@ -12,7 +12,7 @@ class SubApp
 {
 public:
 	SubApp();
-	SubApp(AppID p_AppID);
+	SubApp(EAppID p_AppID);
 
 	/*
 	* The Run() method is the main method that loops the SubApp over and over until the user exits the SubApp
@@ -44,7 +44,7 @@ public:
 	*
 	* Postcondition: Returns m_AppID
 	*/
-	AppID GetAppID() const;
+	EAppID GetAppID() const;
 
 private:
 	/*
@@ -61,7 +61,7 @@ private:
 	virtual void HandleInput(char p_Input) = 0;
 	
 private:
-	AppID m_AppID;
+	EAppID m_AppID;
 
 };
 
