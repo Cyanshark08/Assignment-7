@@ -1,5 +1,7 @@
 #include "Application.h"
 #include <string>
+#include "SimpleCalculatorApp.h"
+#include "NQueenApp.h"
 #include "Input.h"
 
 Application::Application()
@@ -22,10 +24,18 @@ void Application::Run()
             switch (m_CurrentSubApp)
             {
             case EAppID::SimpleCalculatorApp:
+            {
+                SimpleCalculatorApp app;
+                app.Run();
+            }
                 break;
             case EAppID::ArithmeticApp:
                 break;
             case EAppID::NQueensApp:
+            {
+                NQueenApp app;
+                app.Run();
+            }
                 break;
             case EAppID::InvalidApp:
             default:
@@ -51,13 +61,11 @@ void Application::Clean()
 void Application::DisplayMainMenu()
 {
     std::system("cls");
-    puts("\n\tCMPR131 Chapter 5: Vector and List Container by Group 5 (10/1/25)");
+    puts("\n\tCMPR131 Chapter 7: Applications using Stacks by Landon, Andrew, & Jaime (10 / 17 / 25)");
     puts(std::string(110, 205).c_str());
-    puts("\t1 > Vector Container");
-    puts("\t2 > Single-Linked List Container");
-    puts("\t3 > Doubly-Linked List Container");
-    puts("\t4 > Circular-Linked List Container");
-    puts("\t5 > Application using Vector and/or List Container");
+    puts("\t1 > Simple Calculator(problem 9, pg 391)");
+    puts("\t2 > Translation of arithmetic expression(problem 10, pg 391)");
+    puts("\t3 > n - Queens Problem(problem 11, pg 391 - 292)");
     puts(std::string(110, 196).c_str());
     puts("\t0. Exit");
     puts(std::string(110, 205).c_str());

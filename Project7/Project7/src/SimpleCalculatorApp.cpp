@@ -25,6 +25,8 @@ void SimpleCalculatorApp::Run()
 		puts(e.Message().c_str());
 	}
 
+	puts("");
+
 	std::system("pause");
 }
 
@@ -33,7 +35,7 @@ void SimpleCalculatorApp::Restart()
 
 void SimpleCalculatorApp::Clean()
 {
-		
+	m_CalcManager.Clean();
 }
 
 void SimpleCalculatorApp::HandleInput(char p_Input)

@@ -48,10 +48,8 @@ private:
 	float StackEvaluate();
 	bool IsValid();
 	bool IsBalanced();
-
-private:
-	static bool IsOperator(char p_Character);
-	static void evalTop(std::stack<float>& p_Numbers, std::stack<char>& p_Operators);
+	bool IsOperator(char p_Character) const;
+	void evalTop(std::stack<float>& p_Numbers, std::stack<char>& p_Operators) const;
 
 private:
 	std::string m_CurrentExpression;

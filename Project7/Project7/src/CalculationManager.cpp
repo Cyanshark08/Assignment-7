@@ -56,11 +56,12 @@ bool CalculationManager::IsValid()
 {
     if (m_CurrentExpression.empty())
         return false;
+
     for (size_t i = 0; i < m_CurrentExpression.length(); i++)
     {
         char character = m_CurrentExpression[i];
         if (!std::isdigit(character) && !IsOperator(character) &&
-            character != '.' && character != '(' && character != ')')
+            character != '.' && character != '(' && character != ')' && character != ' ')
             return false;
     }
 
@@ -92,14 +93,14 @@ bool CalculationManager::IsBalanced()
     return true;
 }
 
-bool CalculationManager::IsOperator(char p_Character)
+bool CalculationManager::IsOperator(char p_Character) const
 {
-    return p_Character == '*' || p_Character == '+' || p_Character == '/' || p_Character == '-';
+    return (p_Character == '*' || p_Character == '+' || p_Character == '/' || p_Character == '-' || p_Character == '^');
 }
 
-void CalculationManager::evalTop(std::stack<float>& p_Numbers, std::stack<char>& p_Operators)
+void CalculationManager::evalTop(std::stack<float>& p_Numbers, std::stack<char>& p_Operators) const
 {
-    double operand1, operand2;
+    float operand1, operand2;
 
     if (p_Numbers.empty())
         throw E_InvalidExpression();
