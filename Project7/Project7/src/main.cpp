@@ -1,4 +1,5 @@
 #include <algorithm>
+#include "CalculationManager.h"
 
 /*
 * 
@@ -16,7 +17,6 @@
 
 int main()
 {
-
 	Application app;
 
 	app.Run();

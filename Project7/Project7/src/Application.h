@@ -34,7 +34,7 @@ private:
 
 private:
 	MainAppState m_State;
-	AppID m_CurrentSubApp;
+	EAppID m_CurrentSubApp;
 
 };
 

@@ -3,29 +3,58 @@
 #include <memory>
 #include <stack>
 
-enum class CharacterType
+#include "ExceptionInterface.h"
+
+enum class ECharacterType
 {
+	Invalid = -1,
 	Digit,
 	Operator,
-	Decimal,
 	LParenthesis,
 	RParenthesis
 };
 
 class CalculationManager
 {
+public:
 	CalculationManager() = default;
 
-	float Evaluate(std::shared_ptr<std::string> p_Expression);
+	float Evaluate(const std::string& p_Expression);
+
+	void Clean();
+
+public:
+	class E_ImbalancedParentheses : public ExceptionInterface
+	{
+	public:
+		E_ImbalancedParentheses();
+
+	private:
+		std::string GetExceptionName() const override;
+		std::string GetExceptionMessage() const override;
+	};
+
+	class E_InvalidExpression : public ExceptionInterface
+	{
+	public:
+		E_InvalidExpression();
+
+	private:
+		std::string GetExceptionName() const override;
+		std::string GetExceptionMessage() const override;
+	};
 
 private:
 	float StackEvaluate();
-	CharacterType IsValid(char p_Character) const;
+	bool IsValid();
+	bool IsBalanced();
 
 private:
-	std::shared_ptr<std::string> m_CurrentExpression;
-	std::stack<float> m_FloatStack;
-	std::stack<char> m_OperationStack;
+	static bool IsOperator(char p_Character);
+	static void evalTop(std::stack<float>& p_Numbers, std::stack<char>& p_Operators);
+
+private:
+	std::string m_CurrentExpression;
 
 };
 
