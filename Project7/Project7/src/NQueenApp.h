@@ -4,6 +4,7 @@
 #include "Input.h"
 #include <iostream>
 
+
 class NQueenApp : public SubApp
 {
 public:
