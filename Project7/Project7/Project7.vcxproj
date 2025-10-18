@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\NQueen.cpp" />
+    <ClCompile Include="src\NQueenApp.cpp" />
     <ClCompile Include="src\SimpleCalculatorApp.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\CalculationManager.cpp" />
@@ -28,6 +30,8 @@
     <ClCompile Include="src\SubApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\NQueen.h" />
+    <ClInclude Include="src\NQueenApp.h" />
     <ClInclude Include="src\SimpleCalculatorApp.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\CalculationManager.h" />
