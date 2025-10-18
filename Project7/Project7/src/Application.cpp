@@ -1,6 +1,7 @@
 #include "Application.h"
 #include <string>
 #include "SimpleCalculatorApp.h"
+#include "Translator.h"
 #include "NQueenApp.h"
 #include "Input.h"
 
@@ -30,6 +31,10 @@ void Application::Run()
             }
                 break;
             case EAppID::ArithmeticApp:
+            {
+                Translator app;
+                app.Run();
+            }
                 break;
             case EAppID::NQueensApp:
             {

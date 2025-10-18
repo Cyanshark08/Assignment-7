@@ -28,6 +28,7 @@
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\SubApp.cpp" />
+    <ClCompile Include="src\Translator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\NQueen.h" />
@@ -38,6 +39,7 @@
     <ClInclude Include="src\ExceptionInterface.h" />
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\SubApp.h" />
+    <ClInclude Include="src\Translator.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

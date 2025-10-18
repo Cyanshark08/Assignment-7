@@ -15,6 +15,78 @@ float CalculationManager::Evaluate(const std::string& p_Expression)
     return StackEvaluate();
 }
 
+void CalculationManager::TranslateToPostfix(const std::string& p_Expression)
+{
+    if (p_Expression.empty())
+        throw E_InvalidExpression();
+
+    m_CurrentExpression = p_Expression;
+
+    if (!IsValid())
+        throw E_InvalidExpression();
+
+    std::stack<signed char> parenthesesStack;
+    for (auto character : m_CurrentExpression)
+    {
+        if (character == '(')
+            parenthesesStack.push(0);
+
+        if (character == ')')
+        {
+            if (parenthesesStack.empty())
+                throw E_ImbalancedParentheses();
+            parenthesesStack.pop();
+        }
+    }
+
+    auto precedence = [](char op) {
+        if (op == '+' || op == '-') return 1;
+        if (op == '*' || op == '/') return 2;
+        if (op == '^') return 3;
+        return 0;
+        };
+
+    auto isOperator = [](char c) {
+        return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
+        };
+
+    std::stack<char> st;
+    std::string postfix;
+
+    for (char c : p_Expression) {
+        if (isspace(c)) continue; // skip spaces
+
+        if (isalnum(c)) {
+            postfix += c;
+        }
+        else if (c == '(') {
+            st.push(c);
+        }
+        else if (c == ')') {
+            while (!st.empty() && st.top() != '(') {
+                postfix += st.top();
+                st.pop();
+            }
+            if (!st.empty()) st.pop(); // pop '('
+        }
+        else if (isOperator(c)) {
+            while (!st.empty() && precedence(st.top()) >= precedence(c)) {
+                if (c == '^' && st.top() == '^') break; // right-associative '^'
+                postfix += st.top();
+                st.pop();
+            }
+            st.push(c);
+        }
+    }
+
+    while (!st.empty()) {
+        postfix += st.top();
+        st.pop();
+    }
+
+    printf("%s", postfix.c_str());
+}
+
 void CalculationManager::Clean()
 {
     m_CurrentExpression.clear();
@@ -133,6 +205,19 @@ void CalculationManager::evalTop(std::stack<float>& p_Numbers, std::stack<char>&
         break;
     }
     p_Operators.pop();
+}
+
+bool CalculationManager::HasLowerPrecedence(char p_First, char p_Other)
+{
+    if ((p_First == '*' || p_First == '/') && (p_Other == '+' || p_Other == '-'))
+        return false;
+    else if ((p_First == '*' || p_First == '/') && (p_Other == '*' || p_Other == '/'))
+        return false;
+    else if ((p_First == '+' || p_First == '-') && (p_Other == '*' || p_Other == '/'))
+        return true;
+    else
+        return false;
+       
 }
 
 CalculationManager::E_ImbalancedParentheses::E_ImbalancedParentheses()

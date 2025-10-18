@@ -21,6 +21,8 @@ public:
 
 	float Evaluate(const std::string& p_Expression);
 
+	void TranslateToPostfix(const std::string& p_Expression);
+
 	void Clean();
 
 public:
@@ -50,6 +52,7 @@ private:
 	bool IsBalanced();
 	bool IsOperator(char p_Character) const;
 	void evalTop(std::stack<float>& p_Numbers, std::stack<char>& p_Operators) const;
+	bool HasLowerPrecedence(char p_First, char p_Other);
 
 private:
 	std::string m_CurrentExpression;

@@ -17,6 +17,10 @@
 
 int main()
 {
+	CalculationManager manager;
+	manager.TranslateToPostfix("1 + 2 - 3");
+
+
 	Application app;
 
 	app.Run();
