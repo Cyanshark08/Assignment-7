@@ -14,6 +14,8 @@ public:
 	bool isSolved() const;
 	void displayBoard() const;
 
+	int getSize() const;
+
 private:
 	std::vector<std::vector<bool>> m_Board;
 	size_t m_BoardSize;

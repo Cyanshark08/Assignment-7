@@ -183,3 +183,8 @@ void NQueen::displayBoard() const
 
     printf("%s", ss.str().c_str());
 }
+
+int NQueen::getSize() const
+{
+    return m_BoardSize;
+}

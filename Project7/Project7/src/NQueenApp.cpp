@@ -34,45 +34,64 @@ void NQueenApp::Run()
 bool NQueenApp::canSolve()
 {
 	std::stack<NQueen> m_Moves;
-	std::stack<int> column;
+	std::stack<int> columns;
 	bool success = false;
-	m_Moves.push(m_Board);
 
-	int startingColumn = 1;
+	m_Moves.push(m_Board);
+	columns.push(1);
+
 	while (!success && !m_Moves.empty())
 	{
-		int startingRow = m_Moves.size() + 1;
-
-		// reinitialize the temporary board
+		int row = m_Moves.size() + 1;
+		int col = columns.top();
 		NQueen temp = m_Moves.top();
+		bool placed = temp.setQueen(row, col);
 
 		// invalid move
-		if (!temp.setQueen(startingRow, startingColumn))
+		if (!placed)
 		{
 			// pop the latest move
 			m_Moves.pop();
+			columns.pop();
 
-			// try the previous move on a different column
-			startingColumn++;
+			while (!columns.empty())
+			{
+				int prevCol = columns.top();
+				// pop the column that was just used
+				columns.pop();
+
+				if (prevCol + 1 <= m_Board.getSize())
+				{
+					// push the column that is one more than the last 
+					columns.push(prevCol + 1);
+					break;
+				}
+				else
+				{
+					// pop the move
+					m_Moves.pop();
+				}
+			}
+
 		}
 
 		// valid move and board is solved
-		else if (temp.setQueen(startingRow, startingColumn) && temp.isSolved())
+		else if (placed && temp.isSolved())
 		{
 			// initialize the board with the solved board
 			m_Board = temp;
-			return true;
+			success = true;
 		}
-		else if (temp.setQueen(startingRow, startingColumn) && !temp.isSolved())
+
+		// valid move and solved
+		else if (placed && !temp.isSolved())
 		{
 			// push the move onto the stack
 			m_Moves.push(temp);
-
-			// reinitialize the column back to the first column
-			startingColumn = 1;
+			columns.push(1);
 		}
 	}
-	return false;
+	return success;
 }
 
 void NQueenApp::HandleInput(char m_Input)
