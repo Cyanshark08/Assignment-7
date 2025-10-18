@@ -10,17 +10,14 @@
 * 
 * Date: 10/17/2025
 * 
-* 
+*  
+* Project: Using Stacks for NQueens and postfix/infix arithmetic
 */
 
 #include "Application.h"
 
 int main()
 {
-	CalculationManager manager;
-	manager.TranslateToPostfix("1 + 2 - 3");
-
-
 	Application app;
 
 	app.Run();
